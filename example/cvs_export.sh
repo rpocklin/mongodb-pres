@@ -1,0 +1,1 @@
+mongoexport --db users --collection contacts --type=csv --fields name,address --out /opt/backups/contacts.csv

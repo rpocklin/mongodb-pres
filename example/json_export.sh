@@ -1,0 +1,1 @@
+mongoexport --db sales --collection contacts --out contacts.json

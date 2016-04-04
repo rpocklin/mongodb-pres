@@ -1,0 +1,423 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+        title Introduction to MongoDB
+
+        link(rel='stylesheet', type='text/css', href='build/build.css')
+
+    body
+        article
+            section
+                div(style="display: inline-block")
+                    img.right(src="images/mongodb-logo.jpg  " width="500px" style="border-radius: 10px")
+                br
+                br
+                br
+                br
+
+            // 1 min
+            section
+                br
+                br
+                h2 Quick Intro
+                li
+                li Rob Pocklington
+                li Full-stack developer (jack of all trades)
+                li Started with the usual SQL DBs (8 - 10 years)
+                li Tinkered with Graph DB (Neo4J) for 1 year
+                li <br>Been working with MongoDB in production for 2+ years
+                br
+                br
+                br
+                br
+                br
+
+             // 2 mins
+            section
+                h2 What does NoSQL typically mean?
+                li
+                li Web-scalable
+                li Fault tolerance
+                li Scalable architecture
+                li Different QLs
+                li K,V or JSON-based
+                li Eventual (or tunable) consistency
+                li
+
+            // 2 mins
+            section
+                h2 What's out there? (K,V)
+                br
+                li DynamoDB
+                li Cassandra
+                li RocksDB
+                li Redis
+                li Neo4J - GraphDB
+                li
+
+            // 2 mins
+            section
+                h2 What's out there? (NoSQL)
+                br
+                li RethinkDB
+                li CouchBase
+                li Riak
+                li MongoRocks
+                li Elastic Search
+                li
+                    s FoundationDB
+                li
+
+            // 2 mins
+            section
+                h2 Introduction - what is MongoDB?
+                li
+                li A Document DB
+                li Horizontally scalable
+                li Designed for high performance
+                li Designed for flexibility
+                li Framework SDKs and drivers in most languages<br>(Ruby, Java, .NET, Javascript etc)
+                li Drivers in all common languages
+                li
+
+            // 2 mins
+            section
+                h2 MongoDB - History
+                li
+                li Build in 2007 by 10Gen to support their PaaS before Google App Engine existed
+                li Suffered from some early bad-press (optimistic defaults = loss of data)
+                li Used by Foursquare, Forbes, Disney, Cisco, Github, Bitly, Ebay, LinkedIn, CraigsList, Adobe etc.
+                li Now the fourth most popular DB, most popular <a href="http://db-engines.com/en/ranking" target="_blank">NoSQL DB</a>
+                li It is open source!
+                li
+
+            // 2 mins
+            section
+                h2 Features
+                br
+                li Strong Data Types (Dates, Booleans, Arrays ...)
+                li
+                li Extensive query support
+                li Large file storage (GridFS)
+                li Indexing / Load Balancing
+                li Capped Collections
+                li Map reduce
+                li Aggregation pipelines
+
+            // 2 mins
+            section
+                br
+                h2 Features (cont...)
+                li
+                li No join tables
+                li No transactions (tunable consistency)
+                li Atomic at a document-level
+                li Geo-query support (simple and complex)
+                li Full text searching (not as good as ES)
+                li
+
+            // 2 mins
+            section
+                br
+                h2 Features (cont...)
+                li
+                li Command Line Interface (REPL)
+                li Sharding and Replication (for scaling and redundancy)
+                li Full set of tooling (backup and monitoring)
+                li Custom Validations (think: constraints)
+                li BI (v3.2)
+                li
+
+            // 0.5 mins
+            section
+                h2 Software Vendors
+                li
+                li https://mongolab.com
+                li https://scalegrid.io
+                li https://cloud.mongodb.com
+
+            // 0.5 mins
+            section
+                br
+                h2 Common Reasons for Use
+                li
+                li Flexible - good for relational, denormalised or graph data structures
+                li Cuts down on time to market and keeps development speed fast
+                li natural choice for any JSON structured data
+                li popular choice for IoT (real time metrics)
+                li
+                li The data-world is JSON, that’s not gonna change in the short-term
+                li
+
+            // 1 min
+            section
+                h2 Considerations
+                li
+                li Max size of document (16MB)
+                li Big Files / Binaries >> GridFS
+                li No schema != schemaless
+                li Schema design (referencing vs. embedding)
+                li <br>Begin with the end in mind
+                // li https://www.mongodb.com/presentations/mongodb-days-silicon-valley-jumpstart-the-right-and-wrong-use-cases-for-mongodb
+                // slide 2
+
+
+            // 1 minute
+            section
+                h2 CAP Theorem
+                li
+                    img.right(src="images/cap.png" width="400px" height="350px" style="border-radius: 10px;background-color: white")
+
+
+            // 1 min
+            section
+                h2 MongoDB Architecture
+                li
+                li Optimised for 64-bit systems, written in C++ (some Go for newer tools)
+                li Tunable C.A.P (Consistent, Available or Partial Tolerance)
+                li
+                li Pluggable Storage engines (3.0)
+                li
+                li MMAPv1 (original)
+                li WiredTiger (with compression)
+                li MongoRocks (extra library)
+                li
+
+            // 2 mins (more if do guids)
+            section
+                h2 MongoDB Design
+                li
+                li <a href="http://docs.mongodb.org/manual/reference/object-id/" target="_blank">GUIDs</a> for <b>_id</b>
+                li <br>Has an equivalent to foreign key relationships (referencing)
+                li <b>1 -> M, M -> 1, M -> N</b>
+                li <br>or you can embed (more later)
+                li
+
+            // 1 min
+            section
+                h2 Schema Considations
+                li
+                li Design is the difference between loving and hating MongoDB
+                li Schema reviews are important
+                li DB Migrations are easy (but still necessary)
+                li Design for use (fast write / fast read)
+                li <br>Denormalisation is <b>not</b> evil
+                li
+
+            // 6 mins
+            section
+                h2 Mongo Commands
+                li
+                li Commands in MongoDB (vs. <a href="https://docs.mongodb.org/manual/reference/sql-comparison/" target="_blank">SQL</a>)
+                li Let's CRUD in Mongo!
+                li Other queries (Regex, etc.)
+                li <a href="https://docs.mongodb.org/manual/reference/operator/update/" target="_blank">Atomic updates</a>
+                li <br>3T - MongoChef Demo
+                li
+
+            // 1 mins
+            section
+                h2 Referenced Documents (foreign keys)
+                li
+                li
+                    img.right(src="images/referenced.png" width="500px" height="300px" style="border-radius: 10px;background-color: white")
+
+            // 1 mins
+            section
+                h2 Embedded Documents (nested)
+                li
+                li
+                    img.right(src="images/embedded.png" width="500px" height="300px" style="border-radius: 10px;background-color: white")
+
+            // 1 min
+            section
+                h2 Banking scenario
+                li
+                li You can't use non-transaction dbs for banking, right?
+                li Well, Stripe does.
+                li
+                li Just get it right!
+                li
+                li To be atomic in MongoDB you must execute an atomic operation on a single document.
+
+
+            // 1 min
+            section
+                h2 Banking scenario (cont...)
+                li
+                li There is no `BEGIN TRANSACTION` - time to do it another way.
+                li
+                li db.Account.update({_id: ..., balance: {$gte: amount}}, <br>{$inc: { balance: amount }});
+                li
+                li More complex strategies can use MVCC or 2-phase commits if required
+                li
+
+            // 1 min
+            section
+                h2 Security
+                li
+                li Access Control (roles / permissions)
+                li Limiting network access (ports)
+                li Certificates (SSL)
+                li Encryption (file system)
+                li Trust between boxes
+                li
+
+             // optional: skip (1 min)
+            section Durability
+                li
+                li Durability is a question of how much data would be lost in a crash.
+                li Ultimately, you can define how consistent / available you want to be in MongoDB.
+                li
+                //<b>db.getLastError()</b>
+                li <a href="https://docs.mongodb.org/manual/core/replica-set-write-concern/" target="_blank">Write concern</a>
+                li 0, 1, majority
+                li
+                li <a href="https://docs.mongodb.org/manual/core/read-preference/" target="_blank">Read concern</a>
+                li local, majority
+                li
+
+            // optional: skip (1 min)
+            section Journalling
+                li
+                li <a href="//https://docs.mongodb.org/manual/core/journaling/" target="_blank">Journalling</a> is MongoDBs way to make pending operations durable (per node).
+                li By default it writes the journal every 50ms (configurable down to 2ms)
+                li <br>In practice, replication and good backup processes are more important than absolute durability.
+                li
+                //https://docs.mongodb.org/manual/core/journaling/
+                //https://docs.mongodb.org/manual/reference/configuration-options/#storage.journal.commitIntervalMs
+
+            // optional: skip (1 min)
+            section
+                h2 Replication (Replica Sets)
+                li
+                li Creates additional copies of the data and allows for automatic failover to another node.
+                li Requires heart-beat / time synchronisation
+                li Can improve read performance (unless read from master is required)
+                li <br>Think: RAID 1 - mirroring aka duplication (for redundancy)
+                li
+                // https://docs.mongodb.org/v3.0/tutorial/deploy-replica-set-for-testing/
+                // http://zdk.github.io/create-a-three-member-mongodb-replica-set/
+                // https://docs.mongodb.org/manual/core/replica-set-architectures/
+                // https://docs.mongodb.org/manual/core/replica-set-hidden-member/
+
+            // optional: skip (1 min)
+            section Replication (cont...)
+                li
+                li Can use hidden and delayed replicas for analytics / monitoring
+                //li Use `rs.stepDown()` on promoted primary to demote again (once original primary back up)
+                //li Can upgrade priority on a secondary to force it to `step up`
+                li Replicate locally (separate disk for example) just to sort out configuration first.
+                li Careful creating and adding a replica - don't do it in peak traffic!
+                li Consider restoring a primary backup to a replica then adding (less delta)
+                li
+
+            // optional: skip (1 min)
+            section
+                h2 Sharding
+                li
+                li Allows for horizontal scaling of data writes by partitioning data across multiple servers using a shard key.
+                li It's important to choose a good shard key.
+                li Think RAID 0 - striping aka splitting (for performance).
+                li
+                li NOTE: Don't do sharding without replication first.
+                li
+                li
+
+            // optional: skip (1 min)
+            section
+                h2 Sharding (cont...)
+                li
+                li Shard is done per-collection
+                li Choosing shard key (eg. region / country)
+                li Shard locally before sharding over network (work out issues before adding latency)
+                li
+                li Avoid sharding unless you've explored all other scaling options.
+                li
+
+            // OPTIONAL
+            // optional: skip (2 mins)
+            section
+                h2 IoT (Internet of Things)
+                li
+                li The next big <b>Thing™</b>   (sorry <b>Cloud</b>)
+                li efficient logging of RT metrics
+                li aggregate metrics to minute-level (in an array)
+                li store in per-hour <a href="http://www.slideshare.net/mongodb/webinar-best-practices-for-getting-started-with-mongodb#48" target="_blank">documents</a>
+                li
+
+             // OPTIONAL
+             // optional: skip (1 min)
+            section
+                h2 IoT (cont...)
+                li
+                li pre-pad document to avoid fragmentation
+                li pre-allocate 60 seconds for 1 minute of data
+                li also for rolling aggregate metrics (ie. last hour, last day last week)
+                li use <b>slice</b> to keep it the same size (less disk fragmenetation)
+                li
+
+            // 1 min
+            section
+                h2 Metrics - Map-Reduce (old way)
+                li
+                li Original form of real-time data processing
+                li Outputs results to another collection
+                li Superceded by Aggregates
+                li Can be useful for 'discovering' what data you ultimately want
+                li Executed in Javascript (vs. C++ for Aggregations)
+                li
+
+            // 2 mins
+            section
+                h2 Metrics - Aggregation Pipelines
+                li
+                li Faster than superman
+                li Good for daily, weekly, monthly data
+                li <br><a href="http://www.clusterdb.com/mongodb/joins-and-other-aggregation-enhancements-in-mongodb-3-2" target="_blank">Example</a>
+                li
+
+            // 2 mins
+            section
+                h2 Backup and Restoring
+                li
+                li Simpler than most:
+                li <b>mongodump</b> and <b>mongorestore</b>
+                li
+                li Backup admin db if you want to keep roles / permissions (or all dbs)
+                li Ensure you restore the admin db as well
+                li <br>Demo
+                li
+
+            // 1 min
+            section
+                h2 Backup and Restoring (cont...)
+                li
+                li &nbsp;Can backup volume (ie. snapshot on EC2)
+                li
+                li Vendor Solutions
+                li &nbsp;Ops Manager (Enterprise $)
+                li &nbsp;Mongo DB Cloud Manager ($)
+
+            // 1 min
+            section
+                h2 Performance Tuning
+                li
+                li Monitor the usual suspects (memory, disk and CPU)
+                li <b>mongotop</b>, <b>mongostat</b>, <b>htop</b>
+                li Monitor page faults
+                li Monitor Index misses (tune your queries) and
+                li DB Queue length (is the node saturated / hammered?)
+                li
+
+            section
+                h2 Finishing
+                li
+                li Q & A
+                li Thanks!<br><br>Presentation is available at: <br>https://github.com/rpocklin/mongodb-pres
+                li
+                li
+
+        script(src='build/build.js')
