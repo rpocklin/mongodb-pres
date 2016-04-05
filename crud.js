@@ -1,18 +1,36 @@
-db.users.insert({_id: '111-222', name: 'John', age: 16, date_of_birth: ISODate("1990-05-09T00:00:00.000Z")});
-db.users.insert({_id: '111-333', name: 'Jay', age: 16, date_of_birth: ISODate("1995-03-01T00:00:00.000Z")});
+db.users.insert({
+  _id: '111-222', name: 'John', age: 16,
+  date_of_birth: ISODate("1990-05-09T00:00:00.000Z")
+});
+
+db.users.insert({
+  _id: '111-333', name: 'Jay', age: 16,
+  date_of_birth: ISODate("1995-03-01T00:00:00.000Z")
+});
 
 db.users.find();
 
 db.users.createIndex({date_of_birth: 1, name: 1}, {unique: true});
 // would have to do a schema migration if duplicates
 
-db.cars.insert({make: 'Telsa', model: 'Model 3', year: '2017', color: 'red', _id: 'TEL-33R', available: true});
-db.cars.insert({make: 'Telsa', model: 'Model 3', year: '2017', color: 'blue', _id: 'TEL-33B', available: false});
-db.cars.insert({make: 'Telsa', model: 'Model 3', year: '2017', color: 'green', _id: 'TEL-33G', available: true});
+db.cars.insert({
+  make: 'Telsa', model: 'Model 3', year: '2017',
+  color: 'red', _id: 'TEL-33R', available: true
+});
+db.cars.insert({
+  make: 'Telsa', model: 'Model 3', year: '2017',
+  color: 'blue', _id: 'TEL-33B', available: false
+});
+db.cars.insert({
+  make: 'Telsa', model: 'Model 3', year: '2017',
+  color: 'green', _id: 'TEL-33G', available: true
+});
 
 db.cars.find().pretty();
 
-db.booking.insert({
+
+// start 2-phase commit
+db.bookings.insert({
   _id: 'BOOKING-1',
   state: 'pending',
   user_id: '111-222',
@@ -21,8 +39,16 @@ db.booking.insert({
   car_id: 'TEL-33R'
 });
 
-db.cars.update({_id: 'TEL-33R', available: true}, {available: false, booking_id: 'BOOKING-1'});
-db.booking.update({_id: 'BOOKING-1'}, {$set: {state: 'active'}});
+db.cars.update({_id: 'TEL-33R', available: true},
+  {$set: {available: false, booking_id: 'BOOKING-1'}});
+
+// if above update didn't match any rows, car is already booked
+
+// else continue
+db.bookings.update({_id: 'BOOKING-1'}, {$set: {state: 'active'}});
+
+// end 2-phase commit
+
 
 // find all cars which are available
 db.cars.find({available: true});
@@ -54,4 +80,15 @@ db.users.count();
 
 
 // regex
-db.users.find({name: $regex: /J/}});
+db.users.find({name: {$regex: /J/}});
+
+
+// embededding
+db.bookings.insert({
+  state: 'completed',
+  user: {name: 'John', age: 16, date_of_birth: ISODate("1990-05-09T00:00:00.000Z")},
+  car: {
+    make: 'Telsa', model: 'Model 3', year: '2017',
+    color: 'red', _id: 'TEL-33R', available: true
+  }
+});

@@ -11,7 +11,7 @@ html
         article
             section
                 div(style="display: inline-block")
-                    img.right(src="images/mongodb-logo.jpg  " width="500px" style="border-radius: 10px")
+                    img.right(src="images/mongodb-logo.jpg" width="500px" style="border-radius: 10px")
                 br
                 br
                 br
@@ -86,10 +86,10 @@ html
             section
                 h2 MongoDB - History
                 li
-                li Build in 2007 by 10Gen to support their PaaS before Google App Engine existed
-                li Suffered from some early bad-press (optimistic defaults = loss of data)
+                li Build in 2007 by 10Gen to support their PaaS
+                li Suffered from some early bad-press<br>(optimistic defaults = loss of data)
                 li Used by Foursquare, Forbes, Disney, Cisco, Github, Bitly, Ebay, LinkedIn, CraigsList, Adobe etc.
-                li Now the fourth most popular DB, most popular <a href="http://db-engines.com/en/ranking" target="_blank">NoSQL DB</a>
+                li Now the fourth most <a href="http://db-engines.com/en/ranking" target="_blank">popular DB</a> and the most popular <a href="http://db-engines.com/en/ranking/document+store" target="_blank">NoSQL DB</a>
                 li It is open source!
                 li
 
@@ -136,7 +136,8 @@ html
                 li
                 li https://mongolab.com
                 li https://scalegrid.io
-                li https://cloud.mongodb.com
+                li https://cloud.mongodb.com<br><br><br>
+
 
             // 0.5 mins
             section
@@ -144,11 +145,10 @@ html
                 h2 Common Reasons for Use
                 li
                 li Flexible - good for relational, denormalised or graph data structures
-                li Cuts down on time to market and keeps development speed fast
-                li natural choice for any JSON structured data
+                li Cuts down on time to market and speeds development
+                li <br>natural choice for any JSON structured data
                 li popular choice for IoT (real time metrics)
                 li
-                li The data-world is JSON, that’s not gonna change in the short-term
                 li
 
             // 1 min
@@ -183,13 +183,12 @@ html
                 li MMAPv1 (original)
                 li WiredTiger (with compression)
                 li MongoRocks (extra library)
-                li
 
             // 2 mins (more if do guids)
             section
                 h2 MongoDB Design
                 li
-                li <a href="http://docs.mongodb.org/manual/reference/object-id/" target="_blank">GUIDs</a> for <b>_id</b>
+                li <a href="http://docs.mongodb.org/manual/reference/object-id/" target="_blank">GUIDs</a> for <b>id</b>
                 li <br>Has an equivalent to foreign key relationships (referencing)
                 li <b>1 -> M, M -> 1, M -> N</b>
                 li <br>or you can embed (more later)
@@ -249,7 +248,7 @@ html
                 li
                 li There is no `BEGIN TRANSACTION` - time to do it another way.
                 li
-                li db.Account.update({_id: ..., balance: {$gte: amount}}, <br>{$inc: { balance: amount }});
+                li db.account.update({ _id: ..., balance: { $gte: amount }}, <br>{ $inc: { balance: amount }});
                 li
                 li More complex strategies can use MVCC or 2-phase commits if required
                 li
@@ -266,7 +265,8 @@ html
                 li
 
              // optional: skip (1 min)
-            section Durability
+            section
+                h2 Durability
                 li
                 li Durability is a question of how much data would be lost in a crash.
                 li Ultimately, you can define how consistent / available you want to be in MongoDB.
@@ -274,13 +274,12 @@ html
                 //<b>db.getLastError()</b>
                 li <a href="https://docs.mongodb.org/manual/core/replica-set-write-concern/" target="_blank">Write concern</a>
                 li 0, 1, majority
-                li
                 li <a href="https://docs.mongodb.org/manual/core/read-preference/" target="_blank">Read concern</a>
                 li local, majority
-                li
 
             // optional: skip (1 min)
-            section Journalling
+            section
+                h2 Journalling
                 li
                 li <a href="//https://docs.mongodb.org/manual/core/journaling/" target="_blank">Journalling</a> is MongoDBs way to make pending operations durable (per node).
                 li By default it writes the journal every 50ms (configurable down to 2ms)
@@ -304,7 +303,8 @@ html
                 // https://docs.mongodb.org/manual/core/replica-set-hidden-member/
 
             // optional: skip (1 min)
-            section Replication (cont...)
+            section
+                h2 Replication (cont...)
                 li
                 li Can use hidden and delayed replicas for analytics / monitoring
                 //li Use `rs.stepDown()` on promoted primary to demote again (once original primary back up)
@@ -319,7 +319,7 @@ html
                 h2 Sharding
                 li
                 li Allows for horizontal scaling of data writes by partitioning data across multiple servers using a shard key.
-                li It's important to choose a good shard key.
+                li It's important to choose a good <a href="https://docs.mongodb.org/manual/tutorial/choose-a-shard-key/" target="_blank">shard key.</a>
                 li Think RAID 0 - striping aka splitting (for performance).
                 li
                 li NOTE: Don't do sharding without replication first.
@@ -364,9 +364,9 @@ html
                 h2 Metrics - Map-Reduce (old way)
                 li
                 li Original form of real-time data processing
-                li Outputs results to another collection
-                li Superceded by Aggregates
-                li Can be useful for 'discovering' what data you ultimately want
+                li Outputs results to <a href="https://docs.mongodb.org/manual/tutorial/map-reduce-examples/" target="_blank">another collection</a>
+                li Superceded by Aggregation Pipelines
+                li Can be useful for discovering what data you ultimately want
                 li Executed in Javascript (vs. C++ for Aggregations)
                 li
 
@@ -386,7 +386,7 @@ html
                 li Simpler than most:
                 li <b>mongodump</b> and <b>mongorestore</b>
                 li
-                li Backup admin db if you want to keep roles / permissions (or all dbs)
+                li Backup admin db if you want to keep roles / permissions
                 li Ensure you restore the admin db as well
                 li <br>Demo
                 li
@@ -407,7 +407,7 @@ html
                 li
                 li Monitor the usual suspects (memory, disk and CPU)
                 li <b>mongotop</b>, <b>mongostat</b>, <b>htop</b>
-                li Monitor page faults
+                li <br>Monitor page faults
                 li Monitor Index misses (tune your queries) and
                 li DB Queue length (is the node saturated / hammered?)
                 li
@@ -416,7 +416,7 @@ html
                 h2 Finishing
                 li
                 li Q & A
-                li Thanks!<br><br>Presentation is available at: <br>https://github.com/rpocklin/mongodb-pres
+                li Thanks!<br><br>Presentation is available at: <br>http://rp.js.org/mongodb-pres
                 li
                 li
 
